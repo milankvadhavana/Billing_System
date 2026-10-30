@@ -1,27 +1,30 @@
+
 package com.example.bill.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Indexed(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    private String password; // plain text for demo ONLY
+    @Column(nullable = false)
+    private String password;
 
     private String phone;
 }
